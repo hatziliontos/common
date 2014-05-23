@@ -22,6 +22,7 @@ function load() {
   curval_();
 }
 function curval_() {
+  chart.clearChart();
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
   jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
