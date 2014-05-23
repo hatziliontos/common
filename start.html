@@ -5,7 +5,7 @@
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <script language='JavaScript' type='text/JavaScript'>
 google.load('visualization', '1', {packages:['gauge']});
-google.setOnLoadCallback(curval_);
+//google.setOnLoadCallback(curval_);
 var EEL=0;
 var IOT=0;
 var MEZ5=0;
@@ -19,9 +19,13 @@ function load() {
   url_='http://mez5.no-ip.org:22224';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
-//  curval_();
+  curval_();
 }
 function curval_() {
+  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+  var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['EEL', EEL], ['IOT', IOT], ['MEZ5', MEZ5]]);
+  var options = {max: 1500, width: 400, height: 120, redFrom: 900, redTo: 1000, yellowFrom:75, yellowTo: 90, minorTicks: 5};
+  chart.draw(data, options);
   //chart.clearChart();
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
   jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
@@ -29,11 +33,7 @@ function curval_() {
   jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/10792/fields/1/last';
   jQuery.get(url_,function (data) {MEZ5=1*data;document.getElementById("curval_03").innerHTML="CurVal:"+data+"Watts";},'text');
-  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-  var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['EEL', EEL], ['IOT', IOT], ['MEZ5', MEZ5]]);
-  var options = {width: 400, height: 120, redFrom: 900, redTo: 1000, yellowFrom:75, yellowTo: 90, minorTicks: 5};
-  chart.draw(data, options);
-//  setTimeout(curval_, 20000);
+  setTimeout(curval_, 20000);
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
