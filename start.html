@@ -6,24 +6,26 @@
 <script language='JavaScript' type='text/JavaScript'>
 google.load('visualization', '1', {packages:['gauge']});
 google.setOnLoadCallback(drawChart);
+var EEL=0;
+var IOT=0;
+var MEZ5=0;
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Memory', 80],
-          ['CPU', 55],
-          ['Network', 68]
+          ['EEL', EEL],
+          ['IOT', IOT],
+          ['MEZ5', MEZ5]
         ]);
-
-        var options = {
+  var options = {
           width: 400, height: 120,
           redFrom: 90, redTo: 100,
           yellowFrom:75, yellowTo: 90,
           minorTicks: 5
-        };
+  };
 
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
 function load() {
   url_='http://deyak-biologikos.no-ip.org:22225';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_01").innerHTML="LANIP:"+data;},'text');
@@ -38,11 +40,11 @@ function load() {
 }
 function curval_() {
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
-  jQuery.get(url_,function (data) {document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
+  jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
-  jQuery.get(url_,function (data) {document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
+  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/10792/fields/1/last';
-  jQuery.get(url_,function (data) {document.getElementById("curval_03").innerHTML="CurVal:"+data+"Watts";},'text');
+  jQuery.get(url_,function (data) {MEZ5=1*data;document.getElementById("curval_03").innerHTML="CurVal:"+data+"Watts";},'text');
   setTimeout(curval_, 20000);
 }
 </script>
