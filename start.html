@@ -22,7 +22,7 @@ function load() {
   curval_();
 }
 function curval_() {
-  chart.clearChart();
+  //chart.clearChart();
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
   jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
@@ -32,7 +32,7 @@ function curval_() {
   var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
   var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['EEL', EEL], ['IOT', IOT], ['MEZ5', MEZ5]]);
   var options = {width: 400, height: 120, redFrom: 900, redTo: 1000, yellowFrom:75, yellowTo: 90, minorTicks: 5};
-  //chart.draw(data, options);
+  chart.draw(data, options);
   setTimeout(curval_, 20000);
 }
 </script>
