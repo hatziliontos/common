@@ -9,6 +9,9 @@ google.load('visualization', '1', {packages:['gauge']});
 var EEL=0;
 var IOT=0;
 var MEZ5=0;
+var EEL_max=0;
+var IOT_max=0;
+var MEZ5_max=0;
 function load() {
   url_='http://deyak-biologikos.no-ip.org:22225';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_01").innerHTML="LANIP:"+data;},'text');
@@ -20,19 +23,20 @@ function load() {
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
   curval_();
+  EEL_max=0;IOT_max=0;MEZ5_max=0;
 }
 function curval_() {
-  var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-  var data = google.visualization.arrayToDataTable([['Label', 'Value'], ['EEL', EEL], ['IOT', IOT], ['MEZ5', MEZ5]]);
-  var options = {max: 1500, width: 400, height: 120, redFrom: 900, redTo: 1000, yellowFrom:75, yellowTo: 90, minorTicks: 5};
-  chart.draw(data, options);
-  //chart.clearChart();
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
   jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
   jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
   url_='https://api.thingspeak.com/channels/10792/fields/1/last';
   jQuery.get(url_,function (data) {MEZ5=1*data;document.getElementById("curval_03").innerHTML="CurVal:"+data+"Watts";},'text');
+  var chart_01 = new google.visualization.Gauge(document.getElementById('chart_div_01'));
+  var data_01 = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['EEL', EEL] ]);
+  if (EEL>EEL_max) {EEL_max=EEL;}
+  var options_01 = {max: EEL_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
+  chart_01.draw(data_01, options_01);
   setTimeout(curval_, 20000);
 }
 </script>
@@ -53,6 +57,7 @@ body {
    <label id="lanip_01" >LANIP:</label> | 
    <label id="wanip_01" >WANIP:</label> |
    <label id="curval_01" >CurVal:</label> |
+   <div id='chart_div_01'></div>
 </p>
 <a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/iot2014-demo/blob/master/frames.html" target="a2">iot2014-demo</a><br>
 <p>
@@ -66,6 +71,5 @@ body {
    <label id="wanip_03" >WANIP:</label> |
    <label id="curval_03" >CurVal:</label> |
 </p>
-<div id='chart_div'></div>
 </body>
 </html>
