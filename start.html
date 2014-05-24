@@ -16,18 +16,6 @@ function load() {
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
 }
 </script>
-<script language='JavaScript' type='text/JavaScript'>
-  var IOT=0;
-  var IOT_max=0;
-function curval_02() {
-  url_='https://api.thingspeak.com/channels/11468/fields/1/last';
-  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
-  if (IOT>IOT_max) {IOT_max=IOT;}
-  var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':-30, 'max':30 } });
-  gauge3.draw( Math.floor(Math.random()*60)-30 );
-  var run = setInterval(function() { gauge3.draw( Math.floor(Math.random()*60)-30 ); }, 5000);
-}
-</script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
 body {
@@ -61,9 +49,17 @@ body {
 </p>
 <canvas id="canvas3" width="200" height="200"></canvas>
 <script>
-    var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':-30, 'max':30 } });
-    gauge3.draw( Math.floor(Math.random()*60)-30 );
-    var run = setInterval(function() { gauge3.draw( Math.floor(Math.random()*60)-30 ); }, 5000);
+  var IOT=0;
+  var IOT_max=0;
+  var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':0, 'max':1000 } });
+  gauge3.draw( 0 );
+  var run = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/11468/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
+    if (IOT>IOT_max) {IOT_max=IOT;}
+    var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':0, 'max':1*IOT_max } });
+    gauge3.draw( 1*IOT ); 
+  }, 5000);
 </script>
 </body>
 </html>
