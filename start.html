@@ -32,18 +32,18 @@ function curval_01() {
 }
 </script>
 <script language='JavaScript' type='text/JavaScript'>
-google.load('visualization', '1', {packages:['gauge']});
-google.setOnLoadCallback(curval_02);
-var IOT=0;
-var IOT_max=0;
-function curval_02() {
-  url_='https://api.thingspeak.com/channels/11468/fields/1/last';
-  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
-  var chart_02 = new google.visualization.Gauge(document.getElementById('chart_div_02'));
-  var data_02 = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['IOT', IOT] ]);
-  if (IOT>IOT_max) {IOT_max=IOT;}
-  var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
-  chart_02.draw(data_02, options_02);
+//google.load('visualization', '1', {packages:['gauge']});
+//google.setOnLoadCallback(curval_02);
+//var IOT=0;
+//var IOT_max=0;
+//function curval_02() {
+//  url_='https://api.thingspeak.com/channels/11468/fields/1/last';
+//  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
+//  var chart_02 = new google.visualization.Gauge(document.getElementById('chart_div_02'));
+//  var data_02 = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['IOT', IOT] ]);
+//  if (IOT>IOT_max) {IOT_max=IOT;}
+//  var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
+//  chart_02.draw(data_02, options_02);
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
