@@ -4,14 +4,6 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <script language='JavaScript' type='text/JavaScript'>
-google.load('visualization', '1', {packages:['gauge']});
-google.setOnLoadCallback(curval_);
-var EEL=0;
-var IOT=0;
-var MEZ5=0;
-var EEL_max=0;
-var IOT_max=0;
-var MEZ5_max=0;
 function load() {
   url_='http://deyak-biologikos.no-ip.org:22225';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_01").innerHTML="LANIP:"+data;},'text');
@@ -22,13 +14,13 @@ function load() {
   url_='http://mez5.no-ip.org:22224';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
-//  curval_();
-  EEL_max=0;IOT_max=0;MEZ5_max=0;
 }
-function curval_() {
-  curval_01();
-  curval_02();
-}
+</script>
+<script language='JavaScript' type='text/JavaScript'>
+google.load('visualization', '1', {packages:['gauge']});
+google.setOnLoadCallback(curval_01);
+var EEL=0;
+var EEL_max=0;
 function curval_01() {
   url_='https://api.thingspeak.com/channels/10668/fields/1/last';
   jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
@@ -38,6 +30,12 @@ function curval_01() {
   var options_01 = {max: EEL_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
   chart_01.draw(data_01, options_01);
 }
+</script>
+<script language='JavaScript' type='text/JavaScript'>
+google.load('visualization', '1', {packages:['gauge']});
+google.setOnLoadCallback(curval_02);
+var IOT=0;
+var IOT_max=0;
 function curval_02() {
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
   jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
@@ -46,7 +44,6 @@ function curval_02() {
   if (IOT>IOT_max) {IOT_max=IOT;}
   var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
   chart_02.draw(data_02, options_02);
-  //setTimeout(curval_, 20000);
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
