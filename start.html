@@ -3,6 +3,8 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<script src="raphael.2.1.0.min.js"></script>
+<script src="justgage.1.0.1.min.js"></script>
 <script language='JavaScript' type='text/JavaScript'>
 function load() {
   url_='http://deyak-biologikos.no-ip.org:22225';
@@ -17,18 +19,15 @@ function load() {
 }
 </script>
 <script language='JavaScript' type='text/JavaScript'>
-google.load('visualization', '1', {packages:['gauge']});
-google.setOnLoadCallback(curval_01);
-var EEL=0;
-var EEL_max=0;
-function curval_01() {
-  url_='https://api.thingspeak.com/channels/10668/fields/1/last';
-  jQuery.get(url_,function (data) {EEL=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
-  var chart_01 = new google.visualization.Gauge(document.getElementById('chart_div_01'));
-  var data_01 = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['EEL', EEL] ]);
-  if (EEL>EEL_max) {EEL_max=EEL;}
-  var options_01 = {max: EEL_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
-  chart_01.draw(data_01, options_01);
+  var IOT=0;
+  var IOT_max=0;
+function curval_02() {
+  url_='https://api.thingspeak.com/channels/11468/fields/1/last';
+  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
+  if (IOT>IOT_max) {IOT_max=IOT;}
+  var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
+  var g = new JustGage({id: "gauge", value: IOT, min: 0, max: IOT_max, title: "Visitors"});
+  setTimeout(curval_02,20000);
 }
 </script>
 <script language='JavaScript' type='text/JavaScript'>
@@ -44,7 +43,7 @@ function curval_01() {
 //  if (IOT>IOT_max) {IOT_max=IOT;}
 //  var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
 //  chart_02.draw(data_02, options_02);
-}
+//}
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
@@ -63,20 +62,18 @@ body {
    <label id="lanip_01" >LANIP:</label> | 
    <label id="wanip_01" >WANIP:</label> |
    <label id="curval_01" >CurVal:</label> |
-   <div id='chart_div_01'></div>
+   <div id="gauge" class="200x160px"></div>
 </p>
 <a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/iot2014-demo/blob/master/frames.html" target="a2">iot2014-demo</a><br>
 <p>
    <label id="lanip_02" >LANIP:</label> | 
    <label id="wanip_02" >WANIP:</label> |
    <label id="curval_02" >CurVal:</label> |
-   <div id='chart_div_02'></div>
 </p>
 <a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/mez5/blob/master/frames.html" target="a3">Mezoneta 5</a><br>
 <p>
    <label id="lanip_03" >LANIP:</label> | 
    <label id="wanip_03" >WANIP:</label> |
-   <label id="curval_03" >CurVal:</label> |
 </p>
 </body>
 </html>
