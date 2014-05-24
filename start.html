@@ -5,6 +5,7 @@
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <script language='JavaScript' type='text/JavaScript'>
 google.load('visualization', '1', {packages:['gauge']});
+google.setOnLoadCallback(curval_);
 var EEL=0;
 var IOT=0;
 var MEZ5=0;
@@ -22,7 +23,6 @@ function load() {
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
 //  curval_();
-  google.setOnLoadCallback(curval_);
   EEL_max=0;IOT_max=0;MEZ5_max=0;
 }
 function curval_() {
