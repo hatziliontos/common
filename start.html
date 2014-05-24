@@ -2,8 +2,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type='text/javascript' src='https://www.google.com/jsapi'></script>
-<script src="http://htmlpreview.github.io/?https://github.com/bernii/gauge.js/blob/gh-pages/dist/gauge.min.js"></script>
+<script src="http://lazychino.github.io/canvas_gauge/canvasgauge.js"></script>
 <script language='JavaScript' type='text/JavaScript'>
 function load() {
   url_='http://deyak-biologikos.no-ip.org:22225';
@@ -24,38 +23,10 @@ function curval_02() {
   url_='https://api.thingspeak.com/channels/11468/fields/1/last';
   jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
   if (IOT>IOT_max) {IOT_max=IOT;}
-var opts = {
-  lines: 12, // The number of lines to draw
-  angle: 0.15, // The length of each line
-  lineWidth: 0.44, // The line thickness
-  pointer: {
-    length: 0.9, // The radius of the inner circle
-    strokeWidth: 0.035 // The rotation offset
-  },
-  colorStart: '#6FADCF',   // Colors
-  colorStop: '#8FC0DA',    // just experiment with them
-  strokeColor: '#E0E0E0'   // to see which ones work best for you
-};
-var target = document.getElementById('foo'); // your canvas element
-var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-gauge.value = EEL; // set actual value
-gauge.maxValue = EEL_max; // set max gauge value  setTimeout(curval_02,20000);
+  var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':-30, 'max':30 } });
+  gauge3.draw( Math.floor(Math.random()*60)-30 );
+  var run = setInterval(function() { gauge3.draw( Math.floor(Math.random()*60)-30 ); }, 5000);
 }
-</script>
-<script language='JavaScript' type='text/JavaScript'>
-//google.load('visualization', '1', {packages:['gauge']});
-//google.setOnLoadCallback(curval_02);
-//var IOT=0;
-//var IOT_max=0;
-//function curval_02() {
-//  url_='https://api.thingspeak.com/channels/11468/fields/1/last';
-//  jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
-//  var chart_02 = new google.visualization.Gauge(document.getElementById('chart_div_02'));
-//  var data_02 = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['IOT', IOT] ]);
-//  if (IOT>IOT_max) {IOT_max=IOT;}
-//  var options_02 = {max: IOT_max, width: 400, height: 120, redFrom: 0, redTo: 0, yellowFrom: 0, yellowTo: 0, minorTicks: 5};
-//  chart_02.draw(data_02, options_02);
-//}
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
 <style type="text/css">
@@ -88,5 +59,11 @@ body {
    <label id="wanip_03" >WANIP:</label> |
    <label id="curval_03" >CurVal:</label> |
 </p>
+<canvas id="canvas3" width="200" height="200"></canvas>
+<script>
+    var gauge3 = new Gauge("canvas3", {'mode':'needle', 'range': {'min':-30, 'max':30 } });
+    gauge3.draw( Math.floor(Math.random()*60)-30 );
+    var run = setInterval(function() { gauge3.draw( Math.floor(Math.random()*60)-30 ); }, 5000);
+</script>
 </body>
 </html>
