@@ -72,7 +72,7 @@ body {
 <script type="text/javascript">
 var isAccessible = null;
 var run = setInterval(function() { 
-function checkConnection() {
+//function checkConnection() {
   var url = "http://mez5.no-ip.org:2005" ; 
   $.ajax({
     url: url,
@@ -93,10 +93,7 @@ function checkConnection() {
       document.getElementById("mez5-2005").innerHTML="Status:"+xhr.status;
     }
   });
-}
-$(document).ready( function() {
-  checkConnection(); // here I invoke the checking function
-});
+}, 5000);
 </script>
 </body>
 </html>
