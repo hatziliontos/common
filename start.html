@@ -89,7 +89,7 @@ var run = setInterval(function() {
 <a href="http://mez5.no-ip.org:10178" target="p1">Mezoneta 5-Camera   </a> | <label id="mez5-10178" >Status:</label><br>
 <script type="text/javascript">
 var run = setInterval(function() { 
-  $.ajax({url: "http://mez5.no-ip.org:10178",type: "post",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+  $.ajax({url: "http://mez5.no-ip.org:10178/login.htm",type: "post",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
           jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
       document.getElementById("mez5-10178").innerHTML="Status:"+xhr.status;}});}, 10000);
 </script>
@@ -124,14 +124,14 @@ var run = setInterval(function() {
 <a href="http://deyak-biologikos2.no-ip.org:1178" target="p1">Biologikos-Camera1</a> | <label id="biol-1178" >Status:</label><br>
 <script type="text/javascript">
 var run = setInterval(function() { 
-  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1178",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1178/login.htm",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
           jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
       document.getElementById("biol-1178").innerHTML="Status:"+xhr.status;}});}, 10000);
 </script>
 <a href="http://deyak-biologikos2.no-ip.org:1179" target="p1">Biologikos-Camera2</a> | <label id="biol-1179" >Status:</label><br>
 <script type="text/javascript">
 var run = setInterval(function() { 
-  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1179",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1179/login.htm",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
           jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
       document.getElementById("biol-1179").innerHTML="Status:"+xhr.status;}});}, 10000);
 </script>
