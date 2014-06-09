@@ -13,6 +13,9 @@ function load() {
   url_='http://mez5.no-ip.org:22224';
   jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
   jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
+  url_='http://pres10.no-ip.org:22226';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_04").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_04").innerHTML="WANIP:"+data;},'text');
 }
 </script>
 <title>Συνεχής Ενεργειακή Επιτήρηση</title>
@@ -61,6 +64,18 @@ body {
   var run = setInterval(function() { 
     url_='https://api.thingspeak.com/channels/10792/fields/1/last';
     jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_03").innerHTML="CurVal:"+data+"Amps";},'text');
+  }, 20000);
+</script>
+</p>
+<a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/pres10/blob/master/frames.html" target="a3">Pres10</a><br>
+<p>
+   <label id="lanip_04" >LANIP:</label> | 
+   <label id="wanip_04" >WANIP:</label> |
+   <label id="curval_04" >CurVal:</label> |
+<script>
+  var run = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/10792/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_04").innerHTML="CurVal:"+data+"Amps";},'text');
   }, 20000);
 </script>
 </p>
@@ -113,6 +128,13 @@ var run = setInterval(function() {
   $.ajax({url: "http://mez5.no-ip.org:22225",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
           jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
       document.getElementById("mez5-22225").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://pres10.no-ip.org:22226" target="p1">Mezoneta 5-RaspiPres10</a> | <label id="mez5-22226" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://pres10.no-ip.org:22226",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-22226").innerHTML="Status:"+xhr.status;}});}, 10000);
 </script>
 <a href="http://deyak-biologikos2.no-ip.org:80"   target="p1">Biologikos-Mpara</a> | <label id="biol-80"   >Status:</label><br>
 <script type="text/javascript">
