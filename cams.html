@@ -1,0 +1,31 @@
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script language='JavaScript' type='text/JavaScript'>
+function load() {
+  d = new Date();
+  $("#mez5"     ).attr("src", "http://mez5.no-ip.org:10178/snapshot.cgi?user=admin&pwd=123456&next_url=tempsnapshot.jpg&time="+d.getTime());
+  $("#deyakbiol1").attr("src", "http://deyak-biologikos2.no-ip.org:1179/snapshot.cgi?user=admin&pwd=123456&next_url=tempsnapshot.jpg&time="+d.getTime());
+  $("#deyakbiol2").attr("src", "http://deyak-biologikos2.no-ip.org:1178/snapshot.cgi?user=admin&pwd=123456&next_url=tempsnapshot.jpg&time="+d.getTime());
+  setTimeout(load, 2000);
+}
+</script>
+<title>Συνεχής Επιτήρηση</title>
+<style type="text/css">
+body {
+   font-family:verdana,arial,sans-serif;
+   font-size:9pt;
+   margin:8px;
+   background-color:black;
+   color:white;
+   }
+a {
+   color:green;
+   }
+</style>
+</head>
+<body onload="load()">
+  <img id="mez5"       src="" width="350" height="350">
+  <img id="deyakbiol1" src="" width="350" height="350">
+  <img id="deyakbiol2" src="" width="350" height="350">
