@@ -74,8 +74,8 @@ body {
    <label id="curval_04" >CurVal:</label> |
 <script>
   var run = setInterval(function() { 
-    url_='https://api.thingspeak.com/channels/10792/fields/1/last';
-    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_04").innerHTML="CurVal:"+data+"Amps";},'text');
+    url_='http://pres10.no-ip.org:22226/test.js?query=CurVal';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_04").innerHTML="CurVal:"+data+"mH2O";},'text');
   }, 20000);
 </script>
 </p>
