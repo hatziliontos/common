@@ -1,0 +1,11 @@
+{
+    "name": "Host To Tab",
+    "manifest_version": 2,
+    "version": "1.0",
+    "description": "Shows the IP of the current tab at the browser action popup",
+    "background": {"scripts":["background.js"]},
+    "permissions": ["http://www.fileformat.info/tool/rest/dns.json?q=*", "tabs"],
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+}
