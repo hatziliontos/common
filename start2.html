@@ -1,0 +1,201 @@
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script language='JavaScript' type='text/JavaScript'>
+function load() {
+  url_='http://mez5.no-ip.org:22224';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_03").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_03").innerHTML="WANIP:"+data;},'text');
+  url_='http://pres10.no-ip.org:22226';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_04").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_04").innerHTML="WANIP:"+data;},'text');
+}
+</script>
+<title>Συνεχής Ενεργειακή Επιτήρηση</title>
+<style type="text/css">
+body {
+   font-family:verdana,arial,sans-serif;
+   font-size:9pt;
+   margin:10px;
+   background-color:#ff9900;
+}
+table,th,td {
+   border:1px solid black;
+   border-collapse:collapse;
+}
+th,td {
+   padding:5px;
+}
+</style>
+</head>
+<body onload="load()">
+<h4>Εγκαταστάσεις Efergy</h4>
+<a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/iot2014-demo/blob/master/frames.html" target="a2">iot2014-demo</a><br>
+<p>
+   <label id="lanip_02" >LANIP:</label> | 
+   <label id="wanip_02" >WANIP:</label> |
+   <label id="curval_02" >CurVal:</label> |
+<script>
+  var run = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/11468/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML="CurVal:"+data+"Amps";},'text');
+  }, 20000);
+</script>
+</p>
+<a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/mez5/blob/master/frames.html" target="a3">Mezoneta 5</a><br>
+<p>
+   <label id="lanip_03" >LANIP:</label> | 
+   <label id="wanip_03" >WANIP:</label> |
+   <label id="curval_03" >CurVal:</label> |
+<script>
+  var run = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/10792/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_03").innerHTML="CurVal:"+data+"Amps";},'text');
+  }, 20000);
+</script>
+</p>
+<a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/pres10/blob/master/frames.html" target="a3">Pres10</a><br>
+<p>
+   <label id="lanip_04" >LANIP:</label> | 
+   <label id="wanip_04" >WANIP:</label> |
+   <label id="curval_04" >CurVal:</label> |
+<script>
+  var run = setInterval(function() { 
+    url_='http://pres10.no-ip.org:22226/test.js?query=CurVal';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_04").innerHTML="CurVal:"+data+"mH2O";},'text');
+  }, 20000);
+</script>
+</p>
+<h4>Pings</h4>
+<a href="http://mez5.no-ip.org:2005" target="p1">Mezoneta 5-AirLive   </a> | <label id="mez5-2005" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:2005" ,type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-2005" ).innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:15000" target="p1">Mezoneta 5-SMA      </a> | <label id="mez5-15000" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:15000",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-15000").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:15103" target="p1">Mezoneta 5-Lantronix</a> | <label id="mez5-15103" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:15103",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-15103").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:10178" target="p1">Mezoneta 5-Camera   </a> | <label id="mez5-10178" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:10178/login.htm",type: "post",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-10178").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:22223" target="p1">Mezoneta 5-RaspiIOT </a> | <label id="mez5-22223" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:22223",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-22223").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:22224" target="p1">Mezoneta 5-RaspiMez5</a> | <label id="mez5-22224" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:22224",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-22224").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://mez5.no-ip.org:22225" target="p1">Mezoneta 5-RaspiBiol</a> | <label id="mez5-22225" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://mez5.no-ip.org:22225",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-22225").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://pres10.no-ip.org:22226" target="p1">Mezoneta 5-RaspiPres10</a> | <label id="mez5-22226" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://pres10.no-ip.org:22226",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("mez5-22226").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://deyak-biologikos2.no-ip.org:80"   target="p1">Biologikos-Mpara</a> | <label id="biol-80"   >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://deyak-biologikos2.no-ip.org:80"  ,type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("biol-80"  ).innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://deyak-biologikos2.no-ip.org:1178" target="p1">Biologikos-Camera1</a> | <label id="biol-1178" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1178/login.htm",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("biol-1178").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+<a href="http://deyak-biologikos2.no-ip.org:1179" target="p1">Biologikos-Camera2</a> | <label id="biol-1179" >Status:</label><br>
+<script type="text/javascript">
+var run = setInterval(function() { 
+  $.ajax({url: "http://deyak-biologikos2.no-ip.org:1179/login.htm",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("biol-1179").innerHTML="Status:"+xhr.status;}});}, 10000);
+</script>
+
+<table style="width:300px">
+<tr>
+  <th>Σύνδεσμος</th>
+  <th>Status</th>		
+  <th>LAN IP</th>
+  <th>WAN IP</th>
+  <th>Τρέχουσα Τιμή</th>
+</tr>
+<tr>
+  <td><a href="http://deyak-biologikos2.no-ip.org:1230" target="a11">DEYAK-Biologikos-Compressors</a></td>
+  <td><label id="biol-1230" ></td>		
+  <td><label id="lanip_01" >LANIP:</label></td>
+  <td><label id="wanip_01" >WANIP:</label></td>
+  <td><label id="curval_01" >CurVal:</label></td>
+  <script>
+  url_='http://deyak-biologikos.no-ip.org:22225';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_01").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_01").innerHTML="WANIP:"+data;},'text');
+  var run1 = setInterval(function() { 
+    $.ajax({url: "http://deyak-biologikos2.no-ip.org:1230",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("biol-1230").innerHTML="Status:"+xhr.status;}});}, 10000);
+  var run2 = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/10668/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
+  }, 10000);
+  </script>
+</tr>
+<tr>
+  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/DEYAK-Biologikos/blob/master/frames.html" target="a1">DEYAK-Biologikos</a></td>
+  <td><label id="biol-1230" ></td>		
+  <td><label id="lanip_02" >LANIP:</label></td>
+  <td><label id="wanip_02" >WANIP:</label></td>
+  <td><label id="curval_02" >CurVal:</label></td>
+  <script>
+  url_='http://iot2014iot.no-ip.org:22223';
+  jQuery.get(url_+'/Backup/lan_ip.log',        function (data) {document.getElementById("lanip_02").innerHTML="LANIP:"+data;},'text');
+  jQuery.get(url_+'/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip_02").innerHTML="WANIP:"+data;},'text');
+  var run1 = setInterval(function() { 
+    $.ajax({url: "http://deyak-biologikos2.no-ip.org:1230",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
+          jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
+      document.getElementById("biol-1230").innerHTML="Status:"+xhr.status;}});}, 10000);
+  var run2 = setInterval(function() { 
+    url_='https://api.thingspeak.com/channels/10668/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_01").innerHTML="CurVal:"+data+"Amps";},'text');
+  }, 10000);
+  </script>
+</tr>
+</table>
+
+  
+</body>
+</html>
