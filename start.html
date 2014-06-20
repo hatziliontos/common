@@ -25,7 +25,14 @@ body {
    font-size:9pt;
    margin:10px;
    background-color:#ff9900;
-   }
+}
+table,th,td {
+   border:1px solid black;
+   border-collapse:collapse;
+}
+th,td {
+   padding:5px;
+}
 </style>
 </head>
 <body onload="load()">
@@ -164,6 +171,29 @@ var run = setInterval(function() {
           jsonpCallback: 'deadCode',timeout : 10000,complete : function(xhr, responseText, thrownError) {
       document.getElementById("biol-1230").innerHTML="Status:"+xhr.status;}});}, 10000);
 </script>
+
+<table style="width:300px">
+<tr>
+  <th>Σύνδεσμος</th>
+  <th>Status</th>		
+  <th>Παρατηρήσεις</th>
+</tr>
+<tr>
+  <td><a href="http://deyak-biologikos2.no-ip.org:1230" target="p1">Biologikos-Compressors</td>
+  <td>Smith</td>		
+  <td>50</td>
+</tr>
+<tr>
+  <td>Eve</td>
+  <td>Jackson</td>		
+  <td>94</td>
+</tr>
+<tr>
+  <td>John</td>
+  <td>Doe</td>		
+  <td>80</td>
+</tr>
+</table>
 
   
 </body>
