@@ -24,6 +24,7 @@ th,td {
 <table style="width:300px">
 <!--Cameras -->
 <tr>
+  <th>GitHub.com</th>
   <th>Cameras</th>
   <th>Status</th>		
   <th>LAN IP</th>
@@ -31,6 +32,7 @@ th,td {
   <th>Τρέχουσα Τιμή</th>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://mez5.no-ip.org:10178/" target="a1">Mezoneta 5-Camera</a></td>
   <td><label id="mez5-10178" ></td>		
   <td><label id="" ></label>192.168.123.178</td>
@@ -50,6 +52,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://deyak-biologikos2.no-ip.org:1178/" target="a1">Biologikos-Camera 1</a></td>
   <td><label id="biol-1178" ></td>		
   <td><label id="" ></label>192.168.0.178</td>
@@ -69,6 +72,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://deyak-biologikos2.no-ip.org:1179/" target="a1">Biologikos-Camera 2</a></td>
   <td><label id="biol-1179" ></td>		
   <td><label id="" ></label>192.168.0.179</td>
@@ -90,6 +94,7 @@ th,td {
 
 <!--Raspi -->
 <tr>
+  <th>GitHub.com</th>
   <th>Raspi</th>
   <th>Status</th>		
   <th>LAN IP</th>
@@ -97,11 +102,12 @@ th,td {
   <th>Τρέχουσα Τιμή</th>
 </tr>
 <tr>
+  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/iot2014-demo/blob/master/frames.html" target="a1">Efergy-iot2014</a></td>
   <td><a href="http://mez5.no-ip.org:22223/" target="a1">Raspi-IOT</a></td>
   <td><label id="stat-22223" ></td>		
   <td><label id="lanip-22223" ></label></td>
   <td><label id="wanip-22223" ></label></td>
-  <td><label id="" ></label></td>
+  <td><label id="efergy_iot2014_val" ></label></td>
   <script>
   var run11 = setInterval(function() { 
   $.ajax({url: "http://mez5.no-ip.org:22223/",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
@@ -110,15 +116,18 @@ th,td {
   var run12 = setInterval(function() { 
     jQuery.get('http://mez5.no-ip.org:22223/Backup/lan_ip.log',function (data) {document.getElementById("lanip-22223").innerHTML=data;},'text');
     jQuery.get('http://mez5.no-ip.org:22223/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip-22223").innerHTML=data;},'text');
+    url_='https://api.thingspeak.com/channels/11468/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("efergy_iot2014_val").innerHTML=data+"Amps";},'text');
   }, 10000);
   </script>
 </tr>
 <tr>
+  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/mez5/blob/master/frames.html" target="a1">Efergy-Mezoneta 5</a></td>
   <td><a href="http://mez5.no-ip.org:22224/" target="a1">Raspi-mez5</a></td>
   <td><label id="stat-22224" ></td>		
   <td><label id="lanip-22224" ></label></td>
   <td><label id="wanip-22224" ></label></td>
-  <td><label id="" ></label></td>
+  <td><label id="efergy_mez5_val" ></label></td>
   <script>
   var run11 = setInterval(function() { 
   $.ajax({url: "http://mez5.no-ip.org:22224/",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
@@ -127,15 +136,18 @@ th,td {
   var run12 = setInterval(function() { 
     jQuery.get('http://mez5.no-ip.org:22224/Backup/lan_ip.log',function (data) {document.getElementById("lanip-22224").innerHTML=data;},'text');
     jQuery.get('http://mez5.no-ip.org:22224/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip-22224").innerHTML=data;},'text');
+    url_='https://api.thingspeak.com/channels/10792/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("efergy_mez5_val").innerHTML=data+"Watts";},'text');
   }, 10000);
   </script>
 </tr>
 <tr>
+  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/DEYAK-Biologikos/blob/master/frames.html" target="a1">Efergy-Biologikos</a></td>
   <td><a href="http://mez5.no-ip.org:22225/" target="a1">Raspi-Biol</a></td>
   <td><label id="stat-22225" ></td>		
   <td><label id="lanip-22225" ></label></td>
   <td><label id="wanip-22225" ></label></td>
-  <td><label id="" ></label></td>
+  <td><label id="efergy_biol_val" ></label></td>
   <script>
   var run11 = setInterval(function() { 
   $.ajax({url: "http://mez5.no-ip.org:22225/",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
@@ -144,15 +156,18 @@ th,td {
   var run12 = setInterval(function() { 
     jQuery.get('http://mez5.no-ip.org:22225/Backup/lan_ip.log',function (data) {document.getElementById("lanip-22225").innerHTML=data;},'text');
     jQuery.get('http://mez5.no-ip.org:22225/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip-22225").innerHTML=data;},'text');
+    url_='https://api.thingspeak.com/channels/10668/fields/1/last';
+    jQuery.get(url_,function (data) {IOT=0.1*data;document.getElementById("efergy_biol_val").innerHTML=data+"Amps";},'text');
   }, 10000);
   </script>
 </tr>
 <tr>
+  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/pres10/blob/master/frames.html" target="a1">Lantronix-Mezoneta 5</a></td>
   <td><a href="http://mez5.no-ip.org:22226/" target="a1">Raspi-Pres</a></td>
   <td><label id="stat-22226" ></td>		
   <td><label id="lanip-22226" ></label></td>
   <td><label id="wanip-22226" ></label></td>
-  <td><label id="" ></label></td>
+  <td><label id="lantronix_mez5_val" ></label></td>
   <script>
   var run11 = setInterval(function() { 
   $.ajax({url: "http://mez5.no-ip.org:22226/",type: "get",cache: false,dataType: 'jsonp',crossDomain : true,asynchronous : false,
@@ -161,82 +176,15 @@ th,td {
   var run12 = setInterval(function() { 
     jQuery.get('http://mez5.no-ip.org:22226/Backup/lan_ip.log',function (data) {document.getElementById("lanip-22226").innerHTML=data;},'text');
     jQuery.get('http://mez5.no-ip.org:22226/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip-22226").innerHTML=data;},'text');
-  }, 10000);
-  </script>
-</tr>
-
-<!--Efergy -->
-<tr>
-  <th>Efergy</th>
-  <th>Status</th>		
-  <th>LAN IP</th>
-  <th>WAN IP</th>
-  <th>Τρέχουσα Τιμή</th>
-</tr>
-<tr>
-  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/DEYAK-Biologikos/blob/master/frames.html" target="a1">Efergy-Biologikos</a></td>
-  <td><label id="" ></td>		
-  <td><label id="" ></label></td>
-  <td><label id="" ></label></td>
-  <td><label id="curval_01" ></label></td>
-  <script>
-  var run12 = setInterval(function() { 
-    url_='https://api.thingspeak.com/channels/10668/fields/1/last';
-    jQuery.get(url_,function (data) {IOT=0.1*data;document.getElementById("curval_01").innerHTML=data+"Amps";},'text');
-  }, 10000);
-  </script>
-</tr>
-<tr>
-  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/iot2014-demo/blob/master/frames.html" target="a1">Efergy-iot2014</a></td>
-  <td><label id="" ></td>		
-  <td><label id="" ></label></td>
-  <td><label id="" ></label></td>
-  <td><label id="curval_02" ></label></td>
-  <script>
-  var run22 = setInterval(function() { 
-    url_='https://api.thingspeak.com/channels/11468/fields/1/last';
-    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_02").innerHTML=data+"Amps";},'text');
-  }, 10000);
-  </script>
-</tr>
-<tr>
-  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/mez5/blob/master/frames.html" target="a1">Efergy-Mezoneta 5</a></td>
-  <td><label id="" ></td>		
-  <td><label id="" ></label></td>
-  <td><label id="" ></label></td>
-  <td><label id="curval_03" ></label></td>
-  <script>
-  var run32 = setInterval(function() { 
-    url_='https://api.thingspeak.com/channels/10792/fields/1/last';
-    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_03").innerHTML=data+"Watts";},'text');
-  }, 10000);
-  </script>
-</tr>
-
-<!--Lantronix sensors -->
-<tr>
-  <th>Lantronix</th>
-  <th>Status</th>		
-  <th>LAN IP</th>
-  <th>WAN IP</th>
-  <th>Τρέχουσα Τιμή</th>
-</tr>
-<tr>
-  <td><a href="http://htmlpreview.github.io/?https://github.com/hatziliontos/pres10/blob/master/frames.html" target="a1">Lantronix-Mezoneta 5</a></td>
-  <td><label id="" ></td>		
-  <td><label id="" ></label></td>
-  <td><label id="" ></label></td>
-  <td><label id="curval_04" ></label></td>
-  <script>
-  var run42 = setInterval(function() { 
     url_='http://pres10.no-ip.org:22226/test.js?query=CurVal';
-    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("curval_04").innerHTML=data+"mH2O";},'text');
+    jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("lantronix_mez5_val").innerHTML=data+"mH2O";},'text');
   }, 10000);
   </script>
 </tr>
 
 <!--Net Devices -->
 <tr>
+  <th></th>
   <th>Net Devices</th>
   <th>Status</th>		
   <th>LAN IP</th>
@@ -244,6 +192,7 @@ th,td {
   <th>Τρέχουσα Τιμή</th>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://mez5.no-ip.org:2005/" target="a1">Mezoneta 5-AirLive</a></td>
   <td><label id="mez5-2005" ></td>		
   <td><label id="" ></label>192.168.123.254</td>
@@ -257,6 +206,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://mez5.no-ip.org:15000/" target="a1">Mezoneta 5-SMA</a></td>
   <td><label id="mez5-15000" ></td>		
   <td><label id="" ></label>192.168.123.253</td>
@@ -270,6 +220,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://mez5.no-ip.org:15103/" target="a1">Mezoneta 5-Lantronix</a></td>
   <td><label id="mez5-15103" ></td>		
   <td><label id="" ></label>192.168.123.250</td>
@@ -283,6 +234,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://deyak-biologikos2.no-ip.org:80/" target="a1">Biologikos-Mpara</a></td>
   <td><label id="biol-80" ></td>		
   <td><label id="" ></label>192.168.0.220</td>
@@ -296,6 +248,7 @@ th,td {
   </script>
 </tr>
 <tr>
+  <td><label id="" ></label></td>
   <td><a href="http://deyak-biologikos2.no-ip.org:1230/" target="a1">Biologikos-PLC</a></td>
   <td><label id="biol-1230" ></td>		
   <td><label id="" ></label>192.168.0.124</td>
