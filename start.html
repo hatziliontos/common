@@ -187,7 +187,7 @@ th,td {
   var run12 = setInterval(function() { 
     jQuery.get('http://mez5.dyndns.org:22226/Backup/lan_ip.log',function (data) {document.getElementById("lanip-22226").innerHTML=data;},'text');
     jQuery.get('http://mez5.dyndns.org:22226/Backup/wget_dyndns_IP.log',function (data) {document.getElementById("wanip-22226").innerHTML=data;},'text');
-    url_='http://pres10.no-ip.org:22226/test.js?query=CurVal';
+    url_='http://mez5.dyndns.org:22226/test.js?query=CurVal';
     jQuery.get(url_,function (data) {IOT=1*data;document.getElementById("lantronix_mez5_val").innerHTML=data+"mH2O";},'text');
   }, 10000);
   </script>
